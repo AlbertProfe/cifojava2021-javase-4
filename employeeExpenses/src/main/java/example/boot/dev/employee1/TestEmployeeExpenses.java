@@ -20,31 +20,41 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 	private ExpenseRepository expenseRepository;
 
 	public void run(String... args) throws Exception {
-		
-		Employee isa = new Employee ("Isabel", "GoogleLand", 25, "@isa", 1000.00,"11234");
-		Employee joan = new Employee ("Joan", "PreGoogleLand", 25, "@joan", 1000.00,"14");
-		
+
+		Employee isa = new Employee("Isabel", "GoogleLand", 25, "@isa", 1000.00, "11234");
+		Employee joan = new Employee("Joan", "PreGoogleLand", 25, "@joan", 1000.00, "14");
+
 		employeeRepository.save(isa);
 		employeeRepository.save(joan);
-		
-		Expense festa = new Expense ("festa", new Date(), 15.25);
-		
+
+		printTable(employeeRepository);
+
+		Expense festa = new Expense("festa", new Date(), 15.25);
+
 		expenseRepository.save(festa);
-		
+
 		isa.addExpense(festa);
-		//joan.addExpense(festa);
-		
+		// joan.addExpense(festa);
+
 		employeeRepository.save(isa);
-		
-		Expense festa2 = new Expense ("festa", new Date(), 15.25, isa);
-		Expense festa3 = new Expense ("festa", new Date(), 15.25, joan);
-		
+
+		printTable(employeeRepository);
+
+		Expense festa2 = new Expense("festa", new Date(), 15.25, isa);
+		Expense festa3 = new Expense("festa", new Date(), 15.25, joan);
+
 		expenseRepository.save(festa2);
 		expenseRepository.save(festa3);
 
+		printTable(employeeRepository);
+
+		employeeRepository.deleteById(1);
+		employeeRepository.deleteById(2);
+
+		printTable(employeeRepository);
+
 	}
-	
-	
+
 	public static int createIntRandom(int top) {
 
 		Random rand = new Random();
@@ -55,4 +65,21 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 
 	}
 
+	public static void printTable(EmployeeRepository employeeRepository) {
+
+		logger.info("Employee table");
+		employeeRepository.findAll().forEach((employee) -> {
+			logger.info("{}", employee);
+		});
+		logger.info("--------------------------------------------------");
+	}
+
+	public static void printTable(ExpenseRepository expenseRepository) {
+
+		logger.info("Expenses table");
+		expenseRepository.findAll().forEach((expense) -> {
+			logger.info("{}", expense);
+		});
+		logger.info("--------------------------------------------------");
+	}
 }
