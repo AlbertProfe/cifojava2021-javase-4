@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,10 +24,15 @@ public class Expense {
 	private Date date;
 	private double value;
 	
+	@ManyToOne
+	@JoinColumn(name = "EMPLOYEE_ID")
+	private Employee employee;
+	
 		
 	public Expense() {
 		super();
 	}
+	
 	public Expense(String name, Date date, double value) {
 		super();
 	
@@ -33,6 +40,16 @@ public class Expense {
 		this.date = date;
 		this.value = value;
 	}
+	
+	public Expense(String name, Date date, double value, Employee employee) {
+		super();
+	
+		this.name = name;
+		this.date = date;
+		this.value = value;
+		this.employee = employee;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -52,13 +69,21 @@ public class Expense {
 		this.value = value;
 	}
 	
-	
 	public Date getDate() {
 		return date;
 	}
 	public void setDate(Date date) {
 		this.date = date;
 	}
+	
+	public Employee getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Employee employee) {
+		this.employee = employee;
+	}
+
 	@Override
 	public String toString() {
 		return "Expense [id=" + id + ", name=" + name + ", date=" + date + ", value=" + value + "]";

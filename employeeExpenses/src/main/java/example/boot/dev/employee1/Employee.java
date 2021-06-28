@@ -1,9 +1,14 @@
 package example.boot.dev.employee1;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,13 +25,11 @@ public class Employee {
 	public double monthSalary;
 	public String password;
 	
-	//private List<Expense> expenses;
+	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	private List<Expense> expenses = new ArrayList<>();
 	
-
 	public Employee() {
 		super();}
-	
-	
 	
 	public Employee(String name, String surname, int age, String email, double monthSalary,String password) {
 		super();
@@ -40,6 +43,16 @@ public class Employee {
 	}
 	
 	
+	
+	public List<Expense> getExpenses() {
+		return expenses;
+	}
+
+	public void addExpense(Expense expense) {
+		this.expenses.add(expense);
+		expense.setEmployee(this);
+	}
+
 	public String getPassword() {
 		return password;
 	}
