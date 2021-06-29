@@ -23,6 +23,8 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 	private ExpenseRepository expenseRepository;
 	@Autowired
 	private HolidaysRepository holidaysRepository;
+	@Autowired
+	private CourseRepository courseRepository;
 
 	public void run(String... args) throws Exception {
 
@@ -51,8 +53,6 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 		employeeRepository.save(isa);
 		
 		printTable(employeeRepository);
-		
-		
 		
 		Holidays holidays1 = new Holidays(2019, 28);
 		Holidays holidays2 = new Holidays(2020, 26); 
@@ -104,6 +104,25 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 		holidaysRepository.save(holidays3);
 		
 		
+		Course course1 = new Course("JAVA SPRING BOOT", "IFCD", 360, 3, true);
+		Course course2 = new Course("PROGRAMACIÓN CON LENGUAJES ORIENTADOS A OBJETOS Y BASES DE DATOS RELACIONALES", "IFCD", 660, 3, true);
+		Course course3 = new Course("DESARROLLO WEB CON ASP.NET Y C", "IFCD", 250, 3, true);
+		Course course4 = new Course("DESARROLLO DE SOFTWARE CON METODOLOGÍAS ÁGILES: SCRUM", "IFCD", 100, 3, true);
+		
+		courseRepository.save(course1);
+		courseRepository.save(course2);
+		courseRepository.save(course3);
+		courseRepository.save(course4);
+		
+		course1.addEmployee(isa);
+		courseRepository.save(course1);
+		course2.addEmployee(joan);
+		courseRepository.save(course2);
+		course3.addEmployee(isa);
+		courseRepository.save(course3);
+		course4.addEmployee(isa);
+		courseRepository.save(course4);
+				
 	}
 
 	public static int createIntRandom(int top) {
