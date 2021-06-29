@@ -20,6 +20,8 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 	private EmployeeRepository employeeRepository;
 	@Autowired
 	private ExpenseRepository expenseRepository;
+	@Autowired
+	private HolidaysRepository holidaysRepository;
 
 	public void run(String... args) throws Exception {
 
@@ -49,25 +51,16 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 		
 		printTable(employeeRepository);
 		
-
-		//Expense festa2 = new Expense("festa", new Date(), 15.25, isa);
-		//Expense festa3 = new Expense("festa", new Date(), 15.25, joan);
-
-		//expenseRepository.save(festa2);
-		//expenseRepository.save(festa3);
-
-		//printTable(employeeRepository);
-
-		employeeRepository.deleteById(1);
-		expenseRepository.deleteById(1);
-		//employeeRepository.deleteById(2);
-
-		//printTable(employeeRepository);
-
+		Holidays holidays1 = new Holidays(2020, 26); 
 		
-		//Scanner reader = new Scanner(System.in);  // Create a Scanner object
-	   // System.out.println("Enter ....");
-	   // String string = reader.nextLine();
+		holidays1.setEmployee(joan);
+		holidays1.addHolidays(new Date());
+		holidays1.addHolidays(new Date());
+		holidays1.addHolidays(new Date());
+		
+		holidaysRepository.save(holidays1);
+		
+		
 	}
 
 	public static int createIntRandom(int top) {
