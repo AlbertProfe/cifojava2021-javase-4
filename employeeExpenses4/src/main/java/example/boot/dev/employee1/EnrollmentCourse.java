@@ -21,9 +21,16 @@ public class EnrollmentCourse {
 	private int id;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date enrollmentDate;
+	
 	private String room;
 	private boolean online;
-	private String teacher;
+	
+	@ManyToOne
+	@JoinColumn(name = "TEACHER_FID")
+	private Employee teacher;
+	//private String teacher;
+	
+	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date initDate;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -42,18 +49,20 @@ public class EnrollmentCourse {
 	public EnrollmentCourse() {
 		super();
 	}
-	public EnrollmentCourse(Date enrollmentDate, String room, boolean online, String teacher, Date initDate,
+	
+	public EnrollmentCourse(Date enrollmentDate, String room, boolean online, Date initDate,
 			Date finishDate, String calendarCourse, double fee) {
 		super();
 		this.enrollmentDate = enrollmentDate;
 		this.room = room;
 		this.online = online;
-		this.teacher = teacher;
 		this.initDate = initDate;
 		this.finishDate = finishDate;
 		this.calendarCourse = calendarCourse;
 		this.fee = fee;
 	}
+	
+	
 	public int getId() {
 		return id;
 	}
@@ -77,12 +86,6 @@ public class EnrollmentCourse {
 	}
 	public void setOnline(boolean online) {
 		this.online = online;
-	}
-	public String getTeacher() {
-		return teacher;
-	}
-	public void setTeacher(String teacher) {
-		this.teacher = teacher;
 	}
 	public Date getInitDate() {
 		return initDate;
@@ -121,6 +124,15 @@ public class EnrollmentCourse {
 	public void setCertificate(Certificate certificate) {
 		this.certificate = certificate;
 	}
+	
+	public Employee getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Employee teacher) {
+		this.teacher = teacher;
+	}
+
 	@Override
 	public String toString() {
 		return "EnrollmentCourse [id=" + id + ", enrollmentDate=" + enrollmentDate + ", room=" + room + ", online="

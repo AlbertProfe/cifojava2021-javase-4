@@ -13,7 +13,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-//refactor course >>> certificate to do manytomany
+//refactor course >>> certificate to do n:m with @onetomany @maytoone
 @Entity
 @Table
 public class Certificate {
