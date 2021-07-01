@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,18 +21,17 @@ public class Certificate {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column
 	private String name;
 	private String family;
 	private int hours;
 	private int level;
 	private boolean active;
 
-	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "certificate", cascade = CascadeType.ALL)
 	private List<EnrollmentCourse> enrollmentCourses = new ArrayList<EnrollmentCourse>();
 
-	public Certificate() {
-		super();
-	}
+	public Certificate() {}
 
 	public Certificate(String name, String family, int hours, int level, boolean active) {
 		super();

@@ -25,14 +25,19 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 	private HolidaysRepository holidaysRepository;
 	@Autowired
 	private CertificateRepository certificateRepository;
-
+	@Autowired
+	private EnrollmentCourseRepository enrollmentCourseRepository;
+	
 	public void run(String... args) throws Exception {
 
-		Employee isa = new Employee("Isabel", "GoogleLand", 25, "@isa", 1000.00, "11234");
-		Employee joan = new Employee("Joan", "PreGoogleLand", 25, "@joan", 1000.00, "14");
+		Employee isa = new Employee("Isabel", "GoogleLand", 25, "@isa", 1500.00, "11234");
+		Employee joan = new Employee("Joan", "PreGoogleLand", 25, "@joan", 1200.00, "14");
+		Employee dimitry = new Employee("Dimitry", "Paskin", 23, "@dimitry", 1100.00, "1564");
+		
 
 		employeeRepository.save(isa);
 		employeeRepository.save(joan);
+		employeeRepository.save(dimitry);
 
 		printTable(employeeRepository);
 
@@ -102,7 +107,47 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 		holidaysRepository.save(holidays1);
 		holidaysRepository.save(holidays2);
 		holidaysRepository.save(holidays3);
-					
+		
+		Certificate javacourse = new Certificate("JAVA", "IFCD", 500, 3, true);
+		certificateRepository.save(javacourse);
+		Certificate jpa = new Certificate("JPA", "IFCD", 250, 3, true);
+		certificateRepository.save(jpa);
+		Certificate rest = new Certificate("REST", "IFCD", 400, 3, true);
+		certificateRepository.save(rest);
+		Certificate th = new Certificate("TH", "IFCD", 600, 3, true);
+		certificateRepository.save(th);
+		Certificate spring = new Certificate("SPRING", "IFCD", 450, 3, true);
+		certificateRepository.save(th);
+		
+	
+		EnrollmentCourse semester1java1 = new EnrollmentCourse(formater.parse("2019-09-01"),"room106C", false,
+				formater.parse("2019-10-01"), formater.parse("2019-12-01"),"morning" , 2526.23, "Albert");
+		semester1java1.setCertificate(javacourse);
+		semester1java1.setEmployee(isa);
+		enrollmentCourseRepository.save(semester1java1);
+		
+		EnrollmentCourse semester1java2 = new EnrollmentCourse(formater.parse("2019-09-11"),"room106C", false,
+				formater.parse("2019-10-01"), formater.parse("2019-12-01"),"morning" , 2526.23, "Albert");
+		semester1java2.setCertificate(javacourse);
+		semester1java2.setEmployee(joan);
+		enrollmentCourseRepository.save(semester1java2);
+		
+		EnrollmentCourse semester1java3 = new EnrollmentCourse(formater.parse("2019-09-15"),"room106C", false,
+				formater.parse("2019-10-01"), formater.parse("2019-12-01"),"morning" , 2526.23, "Albert");
+		semester1java3.setCertificate(javacourse);
+		semester1java3.setEmployee(dimitry);
+		enrollmentCourseRepository.save(semester1java3);
+		
+		
+		
+		EnrollmentCourse semester2java1 = new EnrollmentCourse(formater.parse("2020-03-01"),"www.java.online.edu", true,
+				formater.parse("2020-10-01"), formater.parse("2020-12-03"),"afternoon" , 2526.23, "Laia");
+		semester2java1.setCertificate(javacourse);
+		semester2java1.setEmployee(isa);
+		enrollmentCourseRepository.save(semester2java1);
+		
+		
+			
 	}
 
 	public static int createIntRandom(int top) {

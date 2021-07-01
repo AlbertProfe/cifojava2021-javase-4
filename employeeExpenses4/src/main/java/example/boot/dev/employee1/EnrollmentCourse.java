@@ -13,8 +13,6 @@ import javax.persistence.Table;
 import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @Table	
-
-
 public class EnrollmentCourse {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -25,10 +23,10 @@ public class EnrollmentCourse {
 	private String room;
 	private boolean online;
 	
-	@ManyToOne
-	@JoinColumn(name = "TEACHER_FID")
-	private Employee teacher;
-	//private String teacher;
+	//@ManyToOne
+	//@JoinColumn(name = "TEACHER_FID")
+	//private Employee teacher;
+	private String teacher;
 	
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -51,7 +49,7 @@ public class EnrollmentCourse {
 	}
 	
 	public EnrollmentCourse(Date enrollmentDate, String room, boolean online, Date initDate,
-			Date finishDate, String calendarCourse, double fee) {
+			Date finishDate, String calendarCourse, double fee, String teacher) {
 		super();
 		this.enrollmentDate = enrollmentDate;
 		this.room = room;
@@ -60,6 +58,7 @@ public class EnrollmentCourse {
 		this.finishDate = finishDate;
 		this.calendarCourse = calendarCourse;
 		this.fee = fee;
+		this.teacher = teacher;
 	}
 	
 	
@@ -125,14 +124,20 @@ public class EnrollmentCourse {
 		this.certificate = certificate;
 	}
 	
-	public Employee getTeacher() {
+	/*
+	 * public Employee getTeacher() { return teacher; }
+	 * 
+	 * public void setTeacher(Employee teacher) { this.teacher = teacher; }
+	 */
+	
+	public String getTeacher() {
 		return teacher;
 	}
 
-	public void setTeacher(Employee teacher) {
+	public void setTeacher(String teacher) {
 		this.teacher = teacher;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "EnrollmentCourse [id=" + id + ", enrollmentDate=" + enrollmentDate + ", room=" + room + ", online="
