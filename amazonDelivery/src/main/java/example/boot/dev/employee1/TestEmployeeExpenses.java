@@ -2,20 +2,13 @@ package example.boot.dev.employee1;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Random;
-import java.util.Scanner;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-import com.github.javafaker.Faker;
 
 @Component
 public class TestEmployeeExpenses implements CommandLineRunner {
-
-	private static final Logger logger = LoggerFactory.getLogger(TestEmployeeExpenses.class);
 
 	@Autowired
 	private EmployeeRepository employeeRepository;
@@ -24,7 +17,6 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 	@Autowired
 	private ShopRepository shopRepository;
 	
-
 	public void run(String... args) throws Exception {
 
 		Employee isa = new Employee("Isabel", "GoogleLand", 25, "@isa", 1500.00, "11234");
@@ -45,11 +37,27 @@ public class TestEmployeeExpenses implements CommandLineRunner {
 		shopRepository.save(shop3);
 		shopRepository.save(shop4);
 		
-
-
-		
-		
-	}
-
+		SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
 	
+		
+		OrderService order1 = new OrderService (formater.parse("2021-07-01"), 3, "byHand", true);
+		OrderService order2 = new OrderService (formater.parse("2021-07-01"), 3, "byHand", true);
+		OrderService order3 = new OrderService (formater.parse("2021-07-01"), 3, "byHand", true);
+		
+		order1.setEmployee(isa);
+		order1.setShop(shop1);
+		
+		order2.setEmployee(isa);
+		order2.setShop(shop2);
+		
+		order3.setEmployee(joan);
+		order3.setShop(shop2);
+		
+		
+		orderRepository.save(order1);
+		orderRepository.save(order2);
+		orderRepository.save(order3);
+		
+		
+	}	
 }

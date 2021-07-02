@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Shop {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -22,16 +22,13 @@ public class Shop {
 	private String direction;
 	private String cif;
 	private String timetable;
-	
-	
+
 	@OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
 	private List<OrderService> orders = new ArrayList<>();
-	
-	
+
 	public Shop() {
 		super();
 	}
-
 
 	public Shop(String name, String direction, String cif, String timetable) {
 		super();
@@ -39,19 +36,16 @@ public class Shop {
 		this.direction = direction;
 		this.cif = cif;
 		this.timetable = timetable;
-	
+
 	}
-	
-	
+
 	public int getId() {
 		return id;
 	}
-
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public List<OrderService> getOrders() {
 		return orders;
@@ -66,53 +60,38 @@ public class Shop {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	public String getDirection() {
 		return direction;
 	}
 
-
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
-
 
 	public String getCif() {
 		return cif;
 	}
 
-
 	public void setCif(String cif) {
 		this.cif = cif;
 	}
-
 
 	public String getTimetable() {
 		return timetable;
 	}
 
-
 	public void setTimetable(String timetable) {
 		this.timetable = timetable;
 	}
-
-
-	
-
-
-	
 
 	@Override
 	public String toString() {
 		return "Shop [id=" + id + ", name=" + name + ", direction=" + direction + ", cif=" + cif + ", timetable="
 				+ timetable + ", orders=" + orders + "]";
 	}
-	
 
-	
 }

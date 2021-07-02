@@ -49,22 +49,15 @@ public class Employee {
 		this.password = password;
 	}
 
-
-	
-	
 	public List<OrderService> getOrders() {
 		return orders;
 	}
-
-
 
 	// we should modify this getter to better use
 	public void addOrder(OrderService order) {
 		this.orders.add(order);
 		order.setEmployee(this);
 	}
-
-	
 
 	public String getPassword() {
 		return password;

@@ -36,14 +36,13 @@ public class OrderService {
 	}
 
 
-	public OrderService(Date date, int qty, String deliveryType, boolean done, Shop shop, Employee employee) {
+	public OrderService(Date date, int qty, String deliveryType, boolean done) {
 		super();
 		this.date = date;
 		this.qty = qty;
 		this.deliveryType = deliveryType;
 		this.done = done;
-		this.shop = shop;
-		this.employee = employee;
+		
 	}
 
 
