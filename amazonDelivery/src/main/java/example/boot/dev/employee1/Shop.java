@@ -25,7 +25,7 @@ public class Shop {
 	
 	
 	@OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
-	private List<Order> orders = new ArrayList<>();
+	private List<OrderService> orders = new ArrayList<>();
 	
 	
 	public Shop() {
@@ -33,15 +33,34 @@ public class Shop {
 	}
 
 
-	public Shop(String name, String direction, String cif, String timetable, List<Order> orders) {
+	public Shop(String name, String direction, String cif, String timetable) {
 		super();
 		this.name = name;
 		this.direction = direction;
 		this.cif = cif;
 		this.timetable = timetable;
-		this.orders = orders;
+	
+	}
+	
+	
+	public int getId() {
+		return id;
 	}
 
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+
+	public List<OrderService> getOrders() {
+		return orders;
+	}
+
+	public void addOrder(OrderService order) {
+		this.orders.add(order);
+		order.setShop(this);
+	}
 
 	public String getName() {
 		return name;
@@ -83,15 +102,10 @@ public class Shop {
 	}
 
 
-	public List<Order> getOrders() {
-		return orders;
-	}
+	
 
 
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
+	
 
 	@Override
 	public String toString() {

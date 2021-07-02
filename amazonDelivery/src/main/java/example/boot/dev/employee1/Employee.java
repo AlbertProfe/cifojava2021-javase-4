@@ -31,7 +31,7 @@ public class Employee {
 
 	
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-	private List<Order> orders = new ArrayList<>();
+	private List<OrderService> orders = new ArrayList<>();
 
 
 	public Employee() {
@@ -50,10 +50,18 @@ public class Employee {
 	}
 
 
+	
+	
+	public List<OrderService> getOrders() {
+		return orders;
+	}
+
+
+
 	// we should modify this getter to better use
-	public void addExpense(Expense expense) {
-		this.expenses.add(expense);
-		expense.setEmployee(this);
+	public void addOrder(OrderService order) {
+		this.orders.add(order);
+		order.setEmployee(this);
 	}
 
 	

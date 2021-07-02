@@ -9,9 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
 @Entity
 @Table
-public class Order {
+public class OrderService {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,23 +23,20 @@ public class Order {
 	private boolean done;
 	
 	@ManyToOne
-	@JoinColumn(name="FID_SHOP")
+	@JoinColumn(name = "FID_SHOP")
 	private Shop shop;
 	
 	
 	@ManyToOne
-	@JoinColumn(name="FID_EMPLOYEE")
+	@JoinColumn(name = "FID_EMPLOYEE")
 	private Employee employee;
-
-
 	
-	
-	public Order() {
+	public OrderService() {
 		super();
 	}
 
 
-	public Order(Date date, int qty, String deliveryType, boolean done, Shop shop, Employee employee) {
+	public OrderService(Date date, int qty, String deliveryType, boolean done, Shop shop, Employee employee) {
 		super();
 		this.date = date;
 		this.qty = qty;
@@ -46,6 +44,17 @@ public class Order {
 		this.done = done;
 		this.shop = shop;
 		this.employee = employee;
+	}
+
+
+	
+	public int getId() {
+		return id;
+	}
+
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 
