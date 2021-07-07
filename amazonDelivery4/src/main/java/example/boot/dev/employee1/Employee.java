@@ -13,14 +13,20 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+
 import javax.persistence.JoinColumn;
 
 @Entity
 @Table
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	
 	private int id;
 	public String name;
 	public String surname;
@@ -29,24 +35,10 @@ public class Employee {
 	public double monthSalary;
 	public String password;
 
-	// we describe the relationship btw two tables in this case
-	// it is a 1:n relationship btw Employee and Expense,
-	// that is, one employee will have one or more expenses.
-	// In Java we express that with an List
-	// and the annotation @OneToMany in the part 1 of 1:n
-	// and in the part n of 1:n we will use @ManyToOne.
-	// We must use MAPPEDBY cause we need to declare which field is the link
-	// they must share a field, there must be a common field, this field
-	// we mark it with MAPPEDBY in employee class and @JoinColumn in expense class
-	// the n part gets the foreign id from employee thanks to @JoinColumn
+	
 	@OneToMany(mappedBy = "employee", cascade = CascadeType.ALL)
-	private List<Expense> expenses = new ArrayList<>();
+	private List<OrderService> orders = new ArrayList<>();
 
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "EMPLOYEE_COURSE",
-				joinColumns = { @JoinColumn(name = "FID_EMPLOYEE") },
-				inverseJoinColumns = {@JoinColumn(name = "FID_COURSE") })
-	private List<Course> courses = new ArrayList<Course>();
 
 	public Employee() {
 		super();
@@ -63,14 +55,14 @@ public class Employee {
 		this.password = password;
 	}
 
-	public List<Expense> getExpenses() {
-		return expenses;
+	public List<OrderService> getOrders() {
+		return orders;
 	}
 
 	// we should modify this getter to better use
-	public void addExpense(Expense expense) {
-		this.expenses.add(expense);
-		//expense.setEmployee(this);
+	public void addOrder(OrderService order) {
+		this.orders.add(order);
+		order.setEmployee(this);
 	}
 
 	public String getPassword() {
@@ -128,14 +120,7 @@ public class Employee {
 	public void setMonthSalary(double monthSalary) {
 		this.monthSalary = monthSalary;
 	}
-	
-	public List<Course> getCourses() {
-		return courses;
-	}
 
-	public void setCourses(List<Course> courses) {
-		this.courses = courses;
-	}
 
 	@Override
 	public String toString() {

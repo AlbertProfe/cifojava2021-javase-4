@@ -45,7 +45,7 @@ public class Course {
 	
 	public void addEmployee (Employee employee) {
 		employees.add(employee);
-		employee.getCourses().add(this);
+		//employee.getCourses().add(this);
 	}
 	
 
