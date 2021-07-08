@@ -19,12 +19,16 @@ public class EmployeeRestController {
 	@Autowired
 	EmployeeRepository employeeRepository;
 
+	// ---------------------- crud: READ -------------------------------------------
+	// -----------------------------------------------------------------------------
 	@GetMapping("/allEmployees")
 	public Iterable<Employee> getAllEnployees() {
 
 		return employeeRepository.findAll();
 	}
 
+	// ---------------------- crud: READ (by Id) ---------------------------------
+	// ---------------------------------------------------------------------------
 	@GetMapping("/getEmployee/{id}")
 	public Employee findById(@PathVariable int id) {
 
@@ -38,12 +42,22 @@ public class EmployeeRestController {
 		return null;
 	}
 
+	// ---------------------- crud: DELETE (by Id) -------------------------------
+	// ----------------------------------------------------------------------------
 	@DeleteMapping("/deleteEmployee/{id}")
 	public void deleteEmployee(@PathVariable int id) {
 
-		employeeRepository.deleteById(id);
+		Optional<Employee> employeeFound = employeeRepository.findById(id);
+
+		if (employeeFound.isPresent()) {
+
+			employeeRepository.deleteById(id);
+		}
+
 	}
 
+	// ---------------------- crud: CREATE (by Id) -------------------------------
+	// ---------------------------------------------------------------------------
 	@PostMapping(path = "/addEmployee", consumes = "application/json")
 	public void insertEmployee(@RequestBody Employee employee) {
 
@@ -51,6 +65,8 @@ public class EmployeeRestController {
 		employeeRepository.save(employee);
 	}
 
+	// ---------------------- crud: UPADATE (by Id) -------------------------------
+	// ----------------------------------------------------------------------------
 	@PutMapping("/updateEmployee/{id}")
 	public void upadateEmployee(@RequestBody Employee employee, @PathVariable int id) {
 
@@ -60,7 +76,7 @@ public class EmployeeRestController {
 
 			if (!employee.getName().equals(employeeFound.get().getName()))
 				employeeFound.get().setName(employee.getName());
-			
+
 			if (!employee.getSurname().equals(employeeFound.get().getSurname()))
 				employeeFound.get().setSurname(employee.getSurname());
 
