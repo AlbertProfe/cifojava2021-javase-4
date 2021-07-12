@@ -70,11 +70,11 @@ JPA **and REST API** @OneToMany, @ManyToOne, @ManyToMany and @JoinColumn, @JoinT
 - employeeExpenses4: `n:m` TA as @Entity and `1:n` `n:1`
    - Employee <> Expense
    - Employee <> Holidays
-   - Employee <> EnrollmentCourse
-- employeeExpenses5: `n:m` TA as two @Entity and `1:n` `n:1`
+   - Employee <> EnrollmentCourse <> Certificate
+- employeeExpenses5: `n:m` TA as two @Entity and `1:n` `n:1` `1:n`
    - Employee <> Expense
    - Employee <> Holidays
-   - Employee <> Enrollment <> Course
+   - Employee <> Enrollment <> Course <> Certificate
 
 
 <a href="https://github.com/AlbertProfe/images/blob/main/cifospring2021/employeeExpenses5.png"><img src="https://github.com/AlbertProfe/images/blob/main/cifospring2021/employeeExpenses5.png" width="600"></a>
