@@ -1,9 +1,9 @@
-# cifojava2021-javase-4
+# cifojava2021-javase-4 
 JPA and Rest Controller (Swagger) with Spring Boot. JPA @OnToMany, @ManyToOne @ManyToMany (just JPA). 
 
-Welcome to the cifojava2021-javase-4 wiki!
+Welcome to the cifojava2021-javase-4 and javaeewiki!
 
-# cifojava2021-javase-4
+# cifojava2021-javase-4 and javaee
 JPA @OneToMany, @ManyToOne, @ManyToMany and @JoinColumn, @JoinTable
 - Spring Boot JPA **without** @Controller, View and Thymeleaf
 - So we use **CommandLineRunner** to test JPA _entities_.
